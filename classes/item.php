@@ -4,12 +4,13 @@ require_once "DBAccess.php";
 
 class Item {
   // private properties
-  private $_photo;
+  private $_itemId;
   private $_itemName;
+  private $_Featured;
   private $_price;
   private $_SalePrice;
+  private $_photo;
   private $_Description;
-  private $_Featured;
 
   // constructor sets up the database settings and creats a DBAccess onject
   public function __construct() {
@@ -25,30 +26,6 @@ class Item {
   }
 
   // set and get methods
-  // get item photo
-  public function getItemPhoto() {
-    return $this->_photo;
-  }
-
-  // get the item name
-  public function getItemName() {
-    return $this->_itemName;
-  }
-
-  // get the price
-  public function getPrice() {
-    return $this->_price;
-  }
-
-  // get the sale price
-  public function getSalePrice() {
-    return $this->_Saleprice;
-  }
-
-  // get description
-  public function getDescription() {
-    return $this->_Description;
-  }
   
   // get featured
   public function getFeatured() {
@@ -89,14 +66,15 @@ class Item {
   }
 
     // get single item
-    public function getSingleItem() {
+    public function getSingleItem($itemId) {
       try {
         // connect to db
         $pdo = $this->_db->connect();
   
         // set up SQL
-        $sql = "SELECT itemId, photo, itemName, price, salePrice, description FROM item WHERE itemId = " . $_GET["itemId"];
+        $sql = "SELECT itemId, photo, itemName, price, salePrice, description FROM item WHERE itemId = :itemId";
         $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(":itemId", $itemId);
   
         // execuet SQL
         $rows = $this->_db->executeSQL($stmt);

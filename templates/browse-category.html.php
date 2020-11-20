@@ -1,6 +1,6 @@
 <?php
   $category = new Category();
-  $categoryNames = $category->getCategoryName();
+  $categoryNames = $category->getCategoryName($_GET["categoryId"]);
   ?>
   <?php foreach ($categoryNames as $categoryName):
     $name = $categoryName["categoryName"];

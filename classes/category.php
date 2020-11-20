@@ -22,14 +22,15 @@ class Category {
 
   // set and get methods
   // get category name
-  public function getCategoryName() {
+  public function getCategoryName($categoryId) {
     try {
       // connect to db
       $pdo = $this->_db->connect();
 
       // set up SQL
-      $sql = "SELECT categoryName  FROM category WHERE categoryId = " . $_GET["categoryId"];
+      $sql = "SELECT categoryName  FROM category WHERE categoryId = :categoryId";
       $stmt = $pdo->prepare($sql);
+      $stmt->bindValue(":categoryId", $categoryId);
 
       // execuet SQL
       $rows = $this->_db->executeSQL($stmt);
@@ -41,23 +42,23 @@ class Category {
   }
 
   // get category id
-  public function getCategoryId() {
-    try {
-      // connect to db
-      $pdo = $this->_db->connect();
+  // public function getCategoryId() {
+  //   try {
+  //     // connect to db
+  //     $pdo = $this->_db->connect();
 
-      // set up SQL
-      $sql = "SELECT categoryId  FROM category";
-      $stmt = $pdo->prepare($sql);
+  //     // set up SQL
+  //     $sql = "SELECT categoryId  FROM category";
+  //     $stmt = $pdo->prepare($sql);
 
-      // execuet SQL
-      $rows = $this->_db->executeSQL($stmt);
+  //     // execuet SQL
+  //     $rows = $this->_db->executeSQL($stmt);
 
-      return $rows;
-    } catch (PDOException $e) {
-      throw $e;
-    }
-  }
+  //     return $rows;
+  //   } catch (PDOException $e) {
+  //     throw $e;
+  //   }
+  // }
 
   // get all categories
   public function getCategories() {
