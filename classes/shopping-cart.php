@@ -10,7 +10,7 @@
       return count($this->_cartItems);
     } 
     
-    public function setShoppingOrderID($id) {
+    public function setShoppingOrderId($id) {
       $this->_shoppingOrderId = (int)$id ;
     } 
     
@@ -69,15 +69,15 @@
     } 
     
     //save cart
-    public function saveCart($Address, $ContactNumber, $CreditCardNumber, $CSV  , $Email, $ExpiryDate, $FirstName, $LastName, $NameOnCard) { 
+    public function saveCart($Address, $ContactNumber, $CreditCardNumber, $CSV  , $Email, $ExpiryDate, $FirstName, $LastName, $NameOnCard) {
       //database setup and connect
       include "settings/db.php";
       $db = new DBAccess($dsn, $username, $password);
-      $pdo = $db ->connect(); 
+      $pdo = $db->connect(); 
       
       //set up SQL statement to insert order
-      $sql = "INSERT INTO ShoppingOrder(Address, ContactNumber, CreditCardNumber, CSV, Email, ExpiryDate, FirstName, LastName, NameOnCard, OrderDate) VALUES(:Address, :ContactNumber, :CreditCardNumber, :CSV, :Email, :ExpiryDate, :FirstName, :LastName, :NameOnCard, curdate())";
-      $stmt = $pdo  ->prepare($sql);
+      $sql = "INSERT INTO shoppingOrder(Address, ContactNumber, CreditCardNumber, CSV, Email, ExpiryDate, FirstName, LastName, NameOnCard, OrderDate) VALUES(:Address, :ContactNumber, :CreditCardNumber, :CSV, :Email, :ExpiryDate, :FirstName, :LastName, :NameOnCard, curdate())";
+      $stmt = $pdo->prepare($sql);
       $stmt->bindValue(":Address" , $Address, PDO::PARAM_STR);
       $stmt->bindValue(":ContactNumber", $ContactNumber, PDO::PARAM_STR);
       $stmt->bindValue(":CreditCardNumber" , $CreditCardNumber, PDO::PARAM_STR);
@@ -87,21 +87,21 @@
       $stmt->bindValue(":FirstName", $FirstName, PDO::PARAM_STR);
       $stmt->bindValue(":LastName", $LastName, PDO::PARAM_STR);
       $stmt->bindValue(":NameOnCard", $NameOnCard, PDO::PARAM_STR);
-      $shoppingOrderID = $db->executeNonQuery ($stmt, true); 
+      $shoppingOrderId = $db->executeNonQuery($stmt, true); 
       
       //loop through shopping cart, insert items
       foreach ($this->_cartItems as $item) { 
         //set up insert statement
-        $sql="INSERT INTO OrderItem(ItemID, Price, Quantity, shoppingOrderID) VALUES(:ItemID, :Price, :Quantity, :shoppingOrderID)"; 
+        $sql= "INSERT INTO orderItem(itemId, price, quantity, shoppingOrderId) VALUES(:itemId, :Price, :Quantity, :shoppingOrderId)"; 
         
         //for each item insert a row in OrderItem
-        $stmt = $pdo  ->prepare($sql);
-        $stmt->bindValue(":ItemID" , $item->getItemId(), PDO::PARAM_INT);
-        $stmt->bindValue(":Price" , $item->getPrice(), PDO::PARAM_STR);
-        $stmt->bindValue(":Quantity" , $item->getQuantity(), PDO::PARAM_INT);
-        $stmt->bindValue(":shoppingOrderID" , $shoppingOrderID, PDO::PARAM_INT);
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(":itemId", $item->getItemId(), PDO::PARAM_INT);
+        $stmt->bindValue(":Price", $item->getPrice(), PDO::PARAM_STR);
+        $stmt->bindValue(":Quantity", $item->getQuantity(), PDO::PARAM_INT);
+        $stmt->bindValue(":shoppingOrderId", $shoppingOrderId, PDO::PARAM_INT);
         $db->executeNonQuery($stmt);
-      } return $shoppingOrderID;
+      } return $shoppingOrderId;
     } 
     
     private function inCart ($cartItem) {

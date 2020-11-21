@@ -86,7 +86,7 @@ class Item {
   }
 
   // get single item
-  public function getSingleItem($id) {
+  public function getSingleItem($singleItemId) {
     try {
       // connect to db
       $pdo = $this->_db->connect();
@@ -94,7 +94,7 @@ class Item {
       // set up SQL
       $sql = "SELECT itemId, photo, itemName, price, salePrice, description FROM item WHERE itemId = :itemId";
       $stmt = $pdo->prepare($sql);
-      $stmt->bindParam(":itemId", $id, PDO::PARAM_INT);
+      $stmt->bindParam(":itemId", $singleItemId, PDO::PARAM_INT);
 
       // execuet SQL
       $rows = $this->_db->executeSQL($stmt);

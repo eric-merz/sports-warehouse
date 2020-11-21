@@ -38,10 +38,10 @@
       <?php endforeach; ?>
     </table>
     
-    <p>Total: $<?= sprintf('%01.2f', $cart->calculateTotal()) ?></p>
-    <button>
-      <a href="checkout.php">Checkout</a>
-    </button>
+
+    <form action="checkout.php" method="POST">
+      <input type="submit" name="checkout" value="Checkout">
+    </form>
     <?php endif;
   ?> 
 </main>
