@@ -94,7 +94,7 @@
                 $categoryId = $row["categoryId"];
                 ?>
                 <li class="footer-category">
-                  <a href="browse-category.php?categoryId=<?= $categoryId ?>"><?= $categoryName ?></a>
+                  <a href="browse-category.php?=<?= $categoryId ?>"><?= $categoryName ?></a>
                 </li>
                 <?php endforeach; ?>
               </ul>

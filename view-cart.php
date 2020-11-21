@@ -5,8 +5,8 @@
 
   session_start();
 
-  // create objects
-  $product = new Item();
+  // create a category object
+  $item = new Item();
   $category = new Category();
 
   $message = "";
@@ -14,27 +14,18 @@
   // retrieve all categories so they can be listed
   $categoryRows = $category->getCategories();
 
-  // retrieve single items so it can be listed
-  if(isset($_GET['itemId'])) {
-    $singleItem = $product->getSingleItem($_GET['itemId']);
-  } elseif (isset($_POST['itemId'])) {
-    $singleItem = $product->getSingleItem($_POST['itemId']);
-  }
-
-  // add itemm to shopping cart
-  if (isset($_POST["addCartButton"])) {
+  // add ietm to shopping cart
+  if (isset($_POST["buy"])) {
     // check product id and qty are not empty
     if (!empty($_POST["itemId"]) && !empty($_POST["qty"])) {
       $itemId = $_POST["itemId"];
       $qty = $_POST["qty"];
 
       // get the product details
-      $product->getProduct($itemId);
-      
-      // check if it is on sale
+      $item->getProduct($itemId);
 
       // create a new cart item so it can be added to the shopping cart
-      $item = new CartItem($product->getItemName(), $qty, $product->getPrice(), $itemId);
+      $item = new CartItem($item->getProductName(), $qty, $item->getPrice(), $itemId);
 
       // check if shopping cart exists
       if(!isset($_SESSION["cart"])) {
@@ -51,15 +42,36 @@
       // save shopping cart back into session
       $_SESSION["cart"] = $cart;
     }
-    
+    header("Location: shopping.php");
+  }
+
+  // remove item from shopping cart
+  if (isset($_POST["remove"])) {
+    // check product id was supplied and cart exists in session
+    if(!empty($_POST["productId"]) && isset($_SESSION["cart"])) {
+      $productId = $_POST["productId"];
+
+      // create a new cart item so it can be removed from the shopping cart
+      // the only value that is important is the product Id
+      $item = new CartItem("", 0, 0, $productId);
+
+      // read shopping cart from session
+      $cart = $_SESSION["cart"];
+
+      // remove item from shopping cart
+      $cart->removeItem($item);
+
+      // save shopping cart back into session
+      $_SESSION["cart"] = $cart;
+    }
     header("Location: view-cart.php");
   }
 
   // start buffer
   ob_start();
 
-  //display selected product
-  include "templates/view-single-product.html.php";
+  //display featured items
+  include "templates/view-cart.html.php";
 
   $output = ob_get_clean();
 

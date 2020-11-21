@@ -13,28 +13,36 @@
   </div>
 
   <main>
-    <div class="view-single-product">
-      <?php if($salePrice > 0): ?>
-        <div class="img-container">
-          <img src="<?= $photo ?>" alt="<?= $description ?>">
+    <form class="view-single-product-form" action="view-single-product.php" method="POST">
+      <div class="view-single-product">
+        <?php if($salePrice > 0): ?>
+          <div class="img-container">
+            <img src="<?= $photo ?>" alt="<?= $description ?>">
+          </div>
+          <div class="content-container">
+            <p class="item-description"><?= $description ?></p>
+            <p class="price sale">$<?= $salePrice ?></p>
+            <p class="full-price">WAS $<span><?= $price ?></span></p>
+            <label for="qty<?=$itemId?>">Quantity:</label>
+            <input class="qty" type="number" id="qty<?=$itemId?>" name="qty" value="1" min="1">
+            <input type="submit" name="addCartButton" id="addCartButton" value="Add to Cart">
+            <input type="hidden" value="<?= $itemId?>" name="itemId">
+          </div>
+        <?php endif; ?>
+        <?php if($salePrice == 0): ?>
+          <div class="img-container">
+            <img src="<?= $photo ?>" alt="<?= $description ?>">
+          </div>
+          <div class="content-container">
+            <p class="item-description"><?= $description ?></p>
+            <p class="price"><?= $price ?></p>
+            <label for="qty<?=$itemId?>">Quantity:</label>
+            <input class="qty" type="number" id="qty<?=$itemId?>" name="qty" value="1" min="1">
+            <input type="submit" name="addCartButton" id="addCartButton" value="Add to Cart">
+            <input type="hidden" value="<?= $itemId?>" name="itemId">
+          </div>
+        <?php endif; ?>
         </div>
-        <div class="content-container">
-          <p class="item-description"><?= $description ?></p>
-          <p class="price sale">$<?= $salePrice ?></p>
-          <p class="full-price">WAS $<span><?= $price ?></span></p>
-          <input type="submit" name="addCartButton" id="addCartButton" value="Add to Cart">
-        </div>
-      <?php endif; ?>
-      <?php if($salePrice == 0): ?>
-        <div class="img-container">
-          <img src="<?= $photo ?>" alt="<?= $description ?>">
-        </div>
-        <div class="content-container">
-          <p class="item-description"><?= $description ?></p>
-          <p class="price"><?= $price ?></p>
-          <input type="submit" name="addCartButton" id="addCartButton" value="Add to Cart">
-        </div>
-      <?php endif; ?>
-      </div>
+      </form>
   </main>
-<?php endforeach;
+<?php endforeach; ?>

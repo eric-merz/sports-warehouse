@@ -8,9 +8,9 @@ class Item {
   private $_itemName;
   private $_Featured;
   private $_price;
-  private $_SalePrice;
+  private $_salePrice;
   private $_photo;
-  private $_Description;
+  private $_description;
 
   // constructor sets up the database settings and creats a DBAccess onject
   public function __construct() {
@@ -27,6 +27,26 @@ class Item {
 
   // set and get methods
   
+  //get price
+  public function getPrice() {
+    return $this->_price;
+  } 
+
+  // get sale price
+  // public function getSalePrice() {
+  //   return $this->_salePrice;
+  // } 
+
+  //get Item ID
+  public function getItemId() {
+    return $this->_productID;
+  }
+  
+  //get Item name
+  public function getItemName() { 
+    return $this->_itemName;
+  }
+
   // get featured
   public function getFeatured() {
     try {
@@ -65,25 +85,49 @@ class Item {
     }
   }
 
-    // get single item
-    public function getSingleItem($itemId) {
-      try {
-        // connect to db
-        $pdo = $this->_db->connect();
-  
-        // set up SQL
-        $sql = "SELECT itemId, photo, itemName, price, salePrice, description FROM item WHERE itemId = :itemId";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindValue(":itemId", $itemId);
-  
-        // execuet SQL
-        $rows = $this->_db->executeSQL($stmt);
-  
-        return $rows;
-      } catch (PDOException $e) {
-        throw $e;
-      }
+  // get single item
+  public function getSingleItem($id) {
+    try {
+      // connect to db
+      $pdo = $this->_db->connect();
+
+      // set up SQL
+      $sql = "SELECT itemId, photo, itemName, price, salePrice, description FROM item WHERE itemId = :itemId";
+      $stmt = $pdo->prepare($sql);
+      $stmt->bindParam(":itemId", $id, PDO::PARAM_INT);
+
+      // execuet SQL
+      $rows = $this->_db->executeSQL($stmt);
+
+      return $rows;
+    } catch (PDOException $e) {
+      throw $e;
     }
+  }
+
+  //get a product from the database for the id supplied
+  public function getProduct($id) {
+    try { 
+      //connect to db
+      $pdo = $this->_db->connect(); 
+      
+      //set up SQL and bind parameters
+      $sql = "SELECT itemId, photo, itemName, price, salePrice, description FROM item WHERE itemId = :itemId";
+      $stmt = $pdo->prepare($sql);
+      $stmt->bindParam(':itemId', $id , PDO::PARAM_INT); 
+      
+      //execute SQL
+      $rows = $this->_db ->executeSQL($stmt);
+      //get the first row as it is a primary key there will only be one row
+      $row = $rows[0]; 
+      //populate the private properties with the retreived values
+      $this->_itemId = $row["itemId"];
+      $this->_itemName = $row["itemName"];
+      $this->_price = $row ["price"];
+    } catch (PDOException $e) { 
+      throw$e;
+    }
+  } 
 
   // get searched
   public function getSearched() {
