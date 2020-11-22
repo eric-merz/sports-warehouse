@@ -21,7 +21,7 @@
     $singleItem = $product->getSingleItem($_POST['itemId']);
   }
 
-  // add itemm to shopping cart
+  // add item to shopping cart
   if (isset($_POST["addCartButton"])) {
     // check product id and qty are not empty
     if (!empty($_POST["itemId"]) && !empty($_POST["qty"])) {
@@ -32,9 +32,14 @@
       $product->getProduct($itemId);
       
       // check if it is on sale
+      if($product->getSalePrice() > 0) {
+        $price = $product->getSalePrice();
+      } else {
+        $price = $product->getPrice();
+      }
 
       // create a new cart item so it can be added to the shopping cart
-      $item = new CartItem($product->getItemName(), $qty, $product->getPrice(), $itemId);
+      $item = new CartItem($product->getItemName(), $qty, $price, $itemId);
 
       // check if shopping cart exists
       if(!isset($_SESSION["cart"])) {

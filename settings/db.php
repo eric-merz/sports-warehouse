@@ -7,7 +7,7 @@
   //check if script is running locally
   if(  $_SERVER["SERVER_NAME"] ==   "localhost" || $_SERVER["SERVER_ADDR"] ==   "127.0.0.1"){ 
     //website is running unser locahost - use local DB details
-      $dsn = "mysql:host=localhost;dbname=northwind_sportswarehouse;charset=utf8";
+      $dsn = "mysql:host=localhost;dbname=sports_warehouse;charset=utf8";
       $username = "root";
       $password = "";  
       } else {

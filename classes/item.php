@@ -33,9 +33,9 @@ class Item {
   } 
 
   // get sale price
-  // public function getSalePrice() {
-  //   return $this->_salePrice;
-  // } 
+  public function getSalePrice() {
+    return $this->_salePrice;
+  } 
 
   //get Item ID
   public function getItemId() {
@@ -124,6 +124,7 @@ class Item {
       $this->_itemId = $row["itemId"];
       $this->_itemName = $row["itemName"];
       $this->_price = $row ["price"];
+      $this->_salePrice = $row ["salePrice"];
     } catch (PDOException $e) { 
       throw$e;
     }

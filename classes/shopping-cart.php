@@ -69,36 +69,36 @@
     } 
     
     //save cart
-    public function saveCart($Address, $ContactNumber, $CreditCardNumber, $CSV  , $Email, $ExpiryDate, $FirstName, $LastName, $NameOnCard) {
+    public function saveCart($Address, $contactNumber, $creditCardNumber, $csv, $email, $expiryDate, $firstName, $lastName, $nameOnCard) {
       //database setup and connect
       include "settings/db.php";
       $db = new DBAccess($dsn, $username, $password);
       $pdo = $db->connect(); 
       
       //set up SQL statement to insert order
-      $sql = "INSERT INTO shoppingOrder(Address, ContactNumber, CreditCardNumber, CSV, Email, ExpiryDate, FirstName, LastName, NameOnCard, OrderDate) VALUES(:Address, :ContactNumber, :CreditCardNumber, :CSV, :Email, :ExpiryDate, :FirstName, :LastName, :NameOnCard, curdate())";
+      $sql = "INSERT INTO shoppingOrder(Address, contactNumber, creditCardNumber, csv, email, expiryDate, firstName, lastName, nameOnCard, OrderDate) VALUES(:Address, :contactNumber, :creditCardNumber, :csv, :email, :expiryDate, :firstName, :lastName, :nameOnCard, curdate())";
       $stmt = $pdo->prepare($sql);
-      $stmt->bindValue(":Address" , $Address, PDO::PARAM_STR);
-      $stmt->bindValue(":ContactNumber", $ContactNumber, PDO::PARAM_STR);
-      $stmt->bindValue(":CreditCardNumber" , $CreditCardNumber, PDO::PARAM_STR);
-      $stmt->bindValue(":CSV" , $CSV, PDO::PARAM_STR);
-      $stmt->bindValue(":Email" , $Email, PDO::PARAM_STR);
-      $stmt->bindValue(":ExpiryDate", $ExpiryDate, PDO::PARAM_STR);
-      $stmt->bindValue(":FirstName", $FirstName, PDO::PARAM_STR);
-      $stmt->bindValue(":LastName", $LastName, PDO::PARAM_STR);
-      $stmt->bindValue(":NameOnCard", $NameOnCard, PDO::PARAM_STR);
+      $stmt->bindValue(":Address", $Address, PDO::PARAM_STR);
+      $stmt->bindValue(":contactNumber", $contactNumber, PDO::PARAM_STR);
+      $stmt->bindValue(":creditCardNumber", $creditCardNumber, PDO::PARAM_STR);
+      $stmt->bindValue(":csv", $csv, PDO::PARAM_STR);
+      $stmt->bindValue(":email", $email, PDO::PARAM_STR);
+      $stmt->bindValue(":expiryDate", $expiryDate, PDO::PARAM_STR);
+      $stmt->bindValue(":firstName", $firstName, PDO::PARAM_STR);
+      $stmt->bindValue(":lastName", $lastName, PDO::PARAM_STR);
+      $stmt->bindValue(":nameOnCard", $nameOnCard, PDO::PARAM_STR);
       $shoppingOrderId = $db->executeNonQuery($stmt, true); 
       
       //loop through shopping cart, insert items
       foreach ($this->_cartItems as $item) { 
         //set up insert statement
-        $sql= "INSERT INTO orderItem(itemId, price, quantity, shoppingOrderId) VALUES(:itemId, :Price, :Quantity, :shoppingOrderId)"; 
+        $sql= "INSERT INTO orderItem(itemId, price, quantity, shoppingOrderId) VALUES(:itemId, :price, :quantity, :shoppingOrderId)"; 
         
         //for each item insert a row in OrderItem
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(":itemId", $item->getItemId(), PDO::PARAM_INT);
-        $stmt->bindValue(":Price", $item->getPrice(), PDO::PARAM_STR);
-        $stmt->bindValue(":Quantity", $item->getQuantity(), PDO::PARAM_INT);
+        $stmt->bindValue(":price", $item->getPrice(), PDO::PARAM_STR);
+        $stmt->bindValue(":quantity", $item->getQuantity(), PDO::PARAM_INT);
         $stmt->bindValue(":shoppingOrderId", $shoppingOrderId, PDO::PARAM_INT);
         $db->executeNonQuery($stmt);
       } return $shoppingOrderId;
