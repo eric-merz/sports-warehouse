@@ -28,9 +28,11 @@
   
           <!-- Navigation Links -->
           <nav class="menu">
-            <button id="mobile-login" class="mobile">
-              <i class="fas fa-lock"></i>Login
-            </button>
+            <a href="login.php">
+              <button id="mobile-login" class="mobile">
+                <i class="fas fa-lock"></i>Login
+              </button>
+            </a>
             <ul class="links">
               <li class="link">
                 <a href="landing.php"><i class="far fa-circle"></i>Home</a>
@@ -48,9 +50,11 @@
           </nav>
   
           <!-- Desktop Cart & Login Buttons -->
-          <button id="desktop-login" class="desktop">
-            <i class="fas fa-lock"></i>Login
-          </button>
+          <a class="desktop-login-link" href="login.php">
+            <button id="desktop-login" class="desktop">
+              <i class="fas fa-lock"></i>Login
+            </button>
+          </a>
           <button id="desktop-cart" class="desktop">
             <i class="fas fa-shopping-cart"></i>View Cart
           </button>

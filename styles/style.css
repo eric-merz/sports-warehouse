@@ -101,9 +101,12 @@ i {
 }
 
 #mobile-cart {
-  margin-left: auto;
   margin-right: 10px;
   padding: 10px 0;
+}
+
+.mobile-cart-link {
+  margin-left: auto;
 }
 
 .cart-items {
@@ -738,8 +741,11 @@ input[type=submit] {
   }
 
   #desktop-login {
+    padding-right: 20px;
+  }
+
+  .desktop-login-link {
     margin-left: auto;
-    padding-right: 30px;
   }
 
   #desktop-cart {
