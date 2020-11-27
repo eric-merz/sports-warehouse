@@ -78,6 +78,7 @@
       <ul class="categories">
         <?php if (isset($_SESSION["username"])): ?>
           <li class="category"><a href="protect-pages-example.php">Admin</a></li>
+          <li class="category"><a href="update-password.php">Update Password</a></li>
           <li class="category"><a href="logout.php">Logout</a></li>
         <?php endif; ?>
         <?php if (!isset($_SESSION["username"])): ?>
@@ -87,7 +88,7 @@
       </ul>
     </nav>
     
-    <main class="main-wrapper">
+    <main class="login-pages-wrapper">
       <?= $output ?>
     </main>
 
