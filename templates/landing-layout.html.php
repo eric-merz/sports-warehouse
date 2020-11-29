@@ -2,8 +2,36 @@
   $title = "Sports Warehouse";
 ?>
 
-<div class="slideshow desktop">
-  <img src="./images/slideshow.jpg" alt="slideshow will go here">
+<div id="slideshow" class="loading slideshow desktop">
+  <ul class="bxslider">
+    <li>
+      <img src="images/slideshow_soccerBall.jpg" alt="Soccer ball in field" title="Soccer ball in field">
+      <div class="overlay">
+        <a href="browse-category.php?categoryId=5">
+          <p>Soccer Balls</p>
+          <button>Shop Now</button>
+        </a>
+      </div>
+    </li>
+    <li>
+      <img src="images/slideshow_boxingGlove.jpg" alt="Punching a boxing bag" title="Punching a boxing bag">
+      <div class="overlay">
+        <a href="browse-category.php?categoryId=7">
+          <p>Boxing Gloves</p>
+          <button>Shop Now</button>
+        </a>
+      </div>
+    </li>
+    <li>
+      <img src="images/slideshow_helmet.jpg" alt="A motorbike Helmet" title="A motorbike Helmet">
+      <div class="overlay">
+        <a href="browse-category.php?categoryId=2">
+          <p>Helmets</p>
+          <button>Shop Now</button>
+        </a>
+      </div>
+    </li>
+  </ul>
 </div>
 
 <main class="featured">

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles/style.css">
+  <link rel="stylesheet" href="plugins/jquery.bxslider/jquery.bxslider.min.css">
   <title><?= $title ?></title>
 </head>
 
@@ -166,6 +167,12 @@
       </div>
     </footer>
   </div>
+<script 
+  src="https://code.jquery.com/jquery-3.5.1.min.js" 
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" 
+  crossorigin="anonymous">
+</script>
+<script src="./plugins/jquery.bxslider/jquery.bxslider.min.js"></script>
 <script src="./scripts/app.js"></script>
 <script src="https://kit.fontawesome.com/5888dd2011.js" crossorigin="anonymous"></script>
 </body>

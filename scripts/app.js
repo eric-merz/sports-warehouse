@@ -1,4 +1,23 @@
 "use strict";
+
+/*=======================================================================
+-------------------------- jQuery slideshow  ----------------------------
+=========================================================================*/
+$(document).ready(function() {
+  // remove loading status - slideshow is hidden by default, this will unhide it when JS is ready.
+  $('#slideshow').removeClass('loading');
+
+  // activate and customize the slideshow
+  $('.bxslider').bxSlider({
+    mode: 'horizontal',
+    captions: false,
+    auto: true,
+    stopAutoOnClick: true,
+    pause: 4000,
+    speed: 500
+  });
+});
+
 /*=======================================================================
 --------------------- References to the DOM  ----------------------------
 =========================================================================*/

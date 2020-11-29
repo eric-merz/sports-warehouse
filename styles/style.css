@@ -509,6 +509,10 @@ h1 {
   max-width: 700px;
 }
 
+.qty {
+  max-width: 70px;
+  margin-right: 10px;
+}
 
 /* ----------------------------------------
 -------------------------------------------
@@ -528,6 +532,11 @@ h1 {
 
 #cart table tr form {
   width: 150px;
+}
+
+input[type="submit"].remove {
+  background-color: #012935;
+  color: #fff
 }
 
 /* ----------------------------------------
@@ -648,6 +657,15 @@ input[type=submit], input[type=reset] {
 
 input[type=submit] {
 	background-color: #FF690B;
+}
+
+button { 
+  padding: 7px 14px;
+	border-radius: 15px;
+  border: none;
+  font-size: 1.8rem;
+  background-color: #FF690B;
+  cursor: pointer;
 }
 
 .error {
@@ -958,4 +976,63 @@ input[type=submit] {
   .section-heading-container {
     padding-left: 0;
   }
+}
+
+/*==================================================================
+  ----------------------- SLIDESHOW STYLES ------------------------- 
+  ==================================================================*/
+#slideshow {
+max-width: 1000px;
+margin: 20px auto;
+}
+
+#slideshow.loading {
+  min-height: 300px;
+  background: url(../images/loading-squares.gif) no-repeat center;
+}
+
+#slideshow.loading .bxslider {
+  display: none;
+}
+
+#slideshow .overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  /* overflow: hidden; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 320px;
+  background: #00aced;
+  border: 5px solid #fff;
+  border-right: none;
+  font-size: 1.6em;
+  border-radius: 50% 0 0 50%;
+}
+
+/*==================================================================
+  --------------- OVERIDING DEFAULT PLUGIN STYLES ------------------ 
+  ==================================================================*/
+
+#slideshow .bx-wrapper {
+  border: none;
+  box-shadow: 0 0 20px #888;
+}
+
+#slideshow .bx-wrapper .bx-pager.bx-default-pager a {
+  background: rgb(0, 172, 235, 0.4);
+  height: 15px;
+  width: 15px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+}
+
+#slideshow .bx-wrapper .bx-pager.bx-default-pager a.active {
+  background: #00aced;
+}
+
+#slideshow .bx-wrapper .bx-pager {
+  bottom: 5px;
 }

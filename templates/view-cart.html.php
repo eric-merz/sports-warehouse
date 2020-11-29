@@ -29,7 +29,7 @@
         <td><?= $qty ?></td>
         <td>
           <form action="view-cart.php" method="POST">
-            <input type="submit" name="remove" value="Remove">
+            <input type="submit" class="remove" name="remove" value="Remove">
             <input type="hidden" value="<?=   $productId ?>" name="productId">
           </form>
         </td>
