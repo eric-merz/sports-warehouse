@@ -18,9 +18,11 @@
             <button id="menu-toggle" class="mobile">
               <i class="fas fa-bars"></i>Menu
             </button>
-            <button id="mobile-cart" class="mobile">
-              <i class="fas fa-shopping-cart"></i>View Cart
-            </button>
+            <a class="mobile-cart-link" href="view-cart.php">
+              <button id="mobile-cart" class="mobile">
+                <i class="fas fa-shopping-cart"></i>View Cart
+              </button>
+            </a>
             <div class="mobile cart-items">
               <p>0 Items</p>
             </div>
@@ -55,9 +57,11 @@
               <i class="fas fa-lock"></i>Login
             </button>
           </a>
-          <button id="desktop-cart" class="desktop">
-            <i class="fas fa-shopping-cart"></i>View Cart
-          </button>
+          <a href="view-cart.php">
+            <button id="desktop-cart" class="desktop">
+              <i class="fas fa-shopping-cart"></i>View Cart
+            </button>
+          </a>
           <div class="desktop cart-items">
             <p>0 Items</p>
           </div>

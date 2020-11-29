@@ -6,7 +6,7 @@
       <input type="password" id="newPassword" name="newPassword" required>
     </p>
     <p>
-      <input type="submit" value="Update password">
+      <input type="submit" value="Change password">
     </p>
   </fieldset>
 </form>
