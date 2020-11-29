@@ -3,6 +3,7 @@
 /*=======================================================================
 -------------------------- jQuery slideshow  ----------------------------
 =========================================================================*/
+
 $(document).ready(function() {
   // remove loading status - slideshow is hidden by default, this will unhide it when JS is ready.
   $('#slideshow').removeClass('loading');
@@ -25,6 +26,15 @@ $(document).ready(function() {
 const menuToggle = document.getElementById("menu-toggle");
 const menu = document.querySelector(".menu")
 const checkoutForm = document.getElementById("checkout");
+const contactForm = document.getElementById("contact-form");
+
+/*=======================================================================
+------------------ Validation regular expressions  ----------------------
+=========================================================================*/
+
+const regexPhone = /^((000|112|106)|(((\+61 ?\(?0?[- ]?)|(\(?0[- ]?))[23478]\)?([- ]?[0-9]){8})|((13|18)([- ]?[0-9]){4}|(1300|1800|1900)([- ]?[0-9]){6}))$/;
+
+const regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 /*=======================================================================
 ------------------ Menu button functionality ----------------------------
@@ -49,7 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
 ------------------ Order delivery and payment validation ----------------
 =========================================================================*/
 
-
 // check that the form exists (in the current page)
 if(checkoutForm) {
   // disable HTML5 validation ("novaildate" is a boolean attribute)
@@ -66,9 +75,6 @@ if(checkoutForm) {
 
     // clear all existing error
     hideAllErrors(checkoutForm);
-
-    // define regular expression patterns
-    const regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     // check if form values are valid
     if(firstName.value.trim().length < 2) {
@@ -87,6 +93,52 @@ if(checkoutForm) {
       showError(email, event, "Email is required.");
     } else if(!regexEmail.test(email.value)) {
       showError(email, event, "Must be valid email address.");
+    }
+  })
+}
+
+/*=======================================================================
+------------------------ Contact page form validation -------------------
+=========================================================================*/
+
+// check that the form exists (in the current page)
+if(contactForm) {
+  // disable HTML5 validation ("novaildate" is a boolean attribute)
+  contactForm.setAttribute("novalidate", "");
+
+  // Apply our own validation using a "submit" event handler
+  contactForm.addEventListener("submit", (event) => {
+    // get references to the form fields
+    const cpFirstName = contactForm.elements["firstName"];
+    const cpLastName = contactForm.elements["lastName"];
+    const cpPhone = contactForm.elements["phone"];
+    const cpEmail = contactForm.elements["email"];
+    const cpQuestion = contactForm.elements["question"];
+
+    // clear all existing error
+    hideAllErrors(contactForm);
+
+    // check if form values are valid
+    if(cpFirstName.value.trim().length < 2) {
+      showError(cpFirstName, event, "Name must be atleast 2 characters.");
+    }
+
+    if(cpLastName.value.trim().length < 2) {
+      showError(cpLastName, event, "Name must be atleast 2 characters.");
+    }
+
+    if(cpPhone.value !== "" && !regexPhone.test(cpPhone.value)) {
+      showError(cpPhone, event, "Must be a valid Australian phone number.")
+    }
+
+    if(cpEmail.value === "") {
+      showError(cpEmail, event, "Email is required.");
+    } else if(!regexEmail.test(cpEmail.value)) {
+      showError(cpEmail, event, "Must be valid email address.");
+    }
+
+    if(cpQuestion.value.trim().length < 30) {
+      showError(cpQuestion, event, "Must be 30+ characters.");
     }
   })
 }

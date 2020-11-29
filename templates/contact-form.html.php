@@ -9,7 +9,7 @@
   </div>
   <p>If you have any questions, we would love to hear from you, please complete the following information.</p>
 
-  <form action="contact.php" method="post" novalidate>
+  <form id="contact-form" action="contact.php" method="post" novalidate>
     <fieldset>
       <!-- <legend>Contact Us</legend> -->
       <p class="input">
@@ -36,7 +36,7 @@
       </p>
 
       <p class="input">
-        <label for="question">Question</label>
+        <label for="question">Question *</label>
         <textarea name="question" id="question"><?= $form->setValue("question") ?></textarea>
       </p>
     </fieldset>
