@@ -31,7 +31,7 @@
   
           <!-- Navigation Links -->
           <nav class="menu">
-            <a class="desktop-login-link" href="login.php">
+            <a class="desktop-login-link" href="admin-home.php">
               <button id="mobile-login" class="mobile">
                 <i class="fas fa-lock"></i>Login
               </button>
@@ -53,7 +53,7 @@
           </nav>
   
           <!-- Desktop Cart & Login Buttons -->
-          <a class="desktop-login-link" href="login.php">
+          <a class="desktop-login-link" href="admin-home.php">
             <button id="desktop-login" class="desktop">
               <i class="fas fa-lock"></i>Login
             </button>

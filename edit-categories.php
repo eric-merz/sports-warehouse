@@ -17,6 +17,37 @@
 
   Authentication::protect();
 
+  // insert new category
+  // check if addNew button has been pressed
+  if(isset($_POST["addNew"])) {
+    // check if a category name was supplied
+    if(!empty($_POST["newCategory"])) {
+      $category->addCategory();
+    }
+    header("Location:edit-categories.php");
+  }
+
+  // delete category
+  // check if delete button has been pressed
+  if(isset($_POST["delete"])) {
+    // check if a category id was supplied
+    if(isset($_POST["categoryId"])) {
+      $category->deleteCategory();
+    }
+    header("Location:edit-categories.php");
+  }
+
+  // rename category
+  // check if delete button has been pressed
+  if(isset($_POST["modify"])) {
+    // check if a category id was supplied
+    if(isset($_POST["modifyCategory"])) {
+      $category->modifyCategory();
+    }
+    header("Location:edit-categories.php");
+  }
+
+
   // start buffer
   ob_start();
 

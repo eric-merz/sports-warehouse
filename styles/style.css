@@ -550,6 +550,11 @@ input[type="submit"].remove {
   padding: 10px;
 }
 
+table {
+  width: 100%;
+  text-align: center;
+}
+
 /* ----------------------------------------
 -------------------------------------------
 ---------- Checkout Page Styling ---------

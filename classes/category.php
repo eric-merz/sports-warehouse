@@ -78,5 +78,50 @@ class Category {
       throw $e;
     }
   }
+
+   // add new category
+   public function addCategory() {
+    // connect to db
+    $pdo = $this->_db->connect();
+
+    // set up SQL
+    $sql = "INSERT INTO category(categoryName) VALUES(:categorName)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(":categorName", $_POST["newCategory"], PDO::PARAM_STR);
+
+    // execuet SQL
+    $message = "New category was added.";
+  }
+
+  // delete category
+  public function deleteCategory() {
+    // connect to db
+    $pdo = $this->_db->connect();
+
+    // set up SQL
+    $sql = "DELETE FROM category WHERE categoryId = :categoryId";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(":categoryId", $_POST["categoryId"], PDO::PARAM_INT);
+
+    // execuet SQL
+    $this->_db->executeNonQuery($stmt, true);
+    $message = "Category was deleted.";
+  }
+
+  // modify category
+  public function modifyCategory() {
+    // connect to db
+    $pdo = $this->_db->connect();
+
+    // set up SQL
+    $sql = "UPDATE category SET categoryName = :categoryName WHERE categoryId = :categoryId";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(":categoryId", $_POST["categoryId"], PDO::PARAM_INT);
+    $stmt->bindValue(":categoryName", $_POST["modifyCategory"], PDO::PARAM_STR);
+
+    // execuet SQL
+    $this->_db->executeNonQuery($stmt, true);
+    $message = "Category was renamed.";
+  }
 }
 ?>

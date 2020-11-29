@@ -52,7 +52,7 @@
           </nav>
   
           <!-- Desktop Cart & Login Buttons -->
-          <a class="desktop-login-link" href="login.php">
+          <a class="desktop-login-link" href="admin-home.php">
             <button id="desktop-login" class="desktop">
               <i class="fas fa-lock"></i>Login
             </button>
@@ -85,11 +85,12 @@
           <li class="category"><a href="edit-categories.php">Edit Categories</a></li>
           <li class="category"><a href="edit-items.php">Edit Items</a></li>
           <li class="category"><a href="update-password.php">Change Password</a></li>
+          <li class="category"><a href="change-theme.php">Change Theme</a></li>
           <li class="category"><a href="logout.php">Logout</a></li>
         <?php endif; ?>
         <?php if (!isset($_SESSION["username"])): ?>
           <li class="category"><a href="create-user.php">Create User</a></li>
-          <li class="category"><a href="login.php">Login</a></li>
+          <li class="category"><a href="admin-home.php">Login</a></li>
         <?php endif; ?>
       </ul>
     </nav>

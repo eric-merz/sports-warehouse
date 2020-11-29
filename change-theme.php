@@ -8,17 +8,15 @@
   if(!isset($_SESSION)) {
     session_start();
   }
-  
-  Authentication::protect();
 
-  $title = "Admin Home";
+  $title = "Change Theme";
   $loginName = $_SESSION["username"];
   
   // start buffer
   ob_start();
 
   // display the create user form
-  include "templates/admin-home.html.php";
+  include "templates/change-theme.html.php";
 
   $output = ob_get_clean();
 

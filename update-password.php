@@ -5,6 +5,10 @@
   $category = new Category();
   $categoryRows = $category->getCategories();
 
+  if(!isset($_SESSION)) {
+    session_start();
+  }
+
   $title = "Update password";
 
   // the authentication class is static so no need to create an instance of the class
@@ -13,7 +17,7 @@
 
   if(!empty($_POST["newPassword"])) {
     // add user
-    $message = Authentication::updatePassword($_POST["newPassword"]);
+    Authentication::updatePassword($_POST["newPassword"]);
   }
 
   // start buffer

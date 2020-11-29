@@ -1,3 +1,6 @@
+<div class="section-heading-container">
+  <h2 class="section-heading"><?= $title ?></h2>
+</div>
 <form action="update-password.php" method="POST">
   <fieldset>
     <legend>Update password</legend>

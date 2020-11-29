@@ -1,3 +1,6 @@
+<div class="section-heading-container">
+  <h2 class="section-heading"><?= $title ?></h2>
+</div>
 <form action="create-user.php" method="POST">
   <fieldset>
     <legend>Create User</legend>
