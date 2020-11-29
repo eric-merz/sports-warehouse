@@ -81,8 +81,9 @@
     <nav class="categories-menu">
       <ul class="categories">
         <?php if (isset($_SESSION["username"])): ?>
-          <li class="category"><a href="protect-pages-example.php">Admin</a></li>
-          <li class="category"><a href="update-password.php">Change Pass</a></li>
+          <li class="category"><a href="edit-categories.php">Edit Categories</a></li>
+          <li class="category"><a href="edit-items.php">Edit Items</a></li>
+          <li class="category"><a href="update-password.php">Change Password</a></li>
           <li class="category"><a href="logout.php">Logout</a></li>
         <?php endif; ?>
         <?php if (!isset($_SESSION["username"])): ?>

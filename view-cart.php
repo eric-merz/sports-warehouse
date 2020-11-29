@@ -9,6 +9,8 @@
   $item = new Item();
   $category = new Category();
 
+  $title = "View Cart";
+
   $message = "";
 
   // retrieve all categories so they can be listed

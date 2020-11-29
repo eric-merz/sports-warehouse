@@ -656,7 +656,8 @@ input[type=submit], input[type=reset] {
 }
 
 input[type=submit] {
-	background-color: #FF690B;
+  background-color: #FF690B;
+  color: #fff;
 }
 
 button { 
@@ -665,6 +666,7 @@ button {
   border: none;
   font-size: 1.8rem;
   background-color: #FF690B;
+  color: #fff;
   cursor: pointer;
 }
 
@@ -982,7 +984,6 @@ button {
   ----------------------- SLIDESHOW STYLES ------------------------- 
   ==================================================================*/
 #slideshow {
-max-width: 1000px;
 margin: 20px auto;
 }
 
@@ -1018,7 +1019,7 @@ margin: 20px auto;
 
 #slideshow .bx-wrapper {
   border: none;
-  box-shadow: 0 0 20px #888;
+  box-shadow: 0 0 10px #999;
 }
 
 #slideshow .bx-wrapper .bx-pager.bx-default-pager a {

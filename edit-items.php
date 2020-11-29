@@ -9,7 +9,7 @@
     session_start();
   }
 
-  $title = "Protected Page";
+  $title = "Edit Items";
 
   //the authentication class is static so there is no need to create an instance of the class
 
@@ -21,7 +21,7 @@
   ob_start();
 
   // display admin content
-  include "templates/admin-section.html.php";
+  include "templates/edit-items.html.php";
 
   $output = ob_get_clean();
 
