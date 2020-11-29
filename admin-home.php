@@ -16,7 +16,7 @@
   ob_start();
 
   // display the create user form
-  include "templates/success.html.php";
+  include "templates/admin-home.html.php";
 
   $output = ob_get_clean();
 

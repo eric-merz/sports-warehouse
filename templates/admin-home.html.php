@@ -1,0 +1,1 @@
+<p>Weclome, <?= $loginName ?>.</p>

@@ -5,7 +5,7 @@
   class Authentication {
     // constants hold values that do not change
     const LoginPageURL = "login.php";
-    const SuccessPageURL = "Success.php";
+    const SuccessPageURL = "admin-home.php";
 
     private static $_db;
 

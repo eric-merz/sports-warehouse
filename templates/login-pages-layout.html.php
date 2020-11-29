@@ -81,6 +81,7 @@
     <nav class="categories-menu">
       <ul class="categories">
         <?php if (isset($_SESSION["username"])): ?>
+          <li class="category"><a href="admin-home.php">Home</a></li>
           <li class="category"><a href="edit-categories.php">Edit Categories</a></li>
           <li class="category"><a href="edit-items.php">Edit Items</a></li>
           <li class="category"><a href="update-password.php">Change Password</a></li>
