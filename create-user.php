@@ -7,6 +7,13 @@
 
   $title = "Create user";
 
+  //read stylesheet theme from session
+  if(isset($_SESSION["theme"])) {
+    $theme = "./styles/" . $_SESSION["theme"] . ".css";
+  } else {
+    $theme = "./styles/style.css";
+  }
+  
   // the authentication class is static so no need to create an instance of the class
 
   $message = "";

@@ -10,7 +10,12 @@
   }
 
   $title = "Edit Categories";
-
+  //read stylesheet theme from session
+  if(isset($_SESSION["theme"])) {
+    $theme = "./styles/" . $_SESSION["theme"] . ".css";
+  } else {
+    $theme = "./styles/style.css";
+  }
   //the authentication class is static so there is no need to create an instance of the class
 
   $message = "";

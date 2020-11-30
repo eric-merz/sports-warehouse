@@ -11,7 +11,13 @@
   }
 
   $title = "Login";
-
+  //read stylesheet theme from session
+  if(isset($_SESSION["theme"])) {
+    $theme = "./styles/" . $_SESSION["theme"] . ".css";
+  } else {
+    $theme = "./styles/style.css";
+  }
+  
   $message = "";
 
   if(isset($_POST["loginSubmit"])) {

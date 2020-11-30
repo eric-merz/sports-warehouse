@@ -11,7 +11,7 @@
       <input type="text" id="newCategory" name="newCategory" required>
     </span>
     <span>
-      <input type="submit" name="addNew" value="Add">
+      <input class="edit-category" type="submit" name="addNew" value="Add">
     </span>
   </p>
   <p><?= $message ?></p>
@@ -40,7 +40,7 @@
           <input type="text" id="modifyCategory" name="modifyCategory">
         </td>
         <td>
-          <input type="submit" name="modify" value="Modify">
+          <input class="edit-category" type="submit" name="modify" value="Modify">
           <input type="submit" name="delete" value="Delete">
           <input type="hidden" name="categoryId" value="<?= $categoryId ?>" >
         </td>

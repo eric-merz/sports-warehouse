@@ -8,6 +8,13 @@
   if(!isset($_SESSION)) {
     session_start();
   }
+
+  //read stylesheet theme from session
+  if(isset($_SESSION["theme"])) {
+    $theme = "./styles/" . $_SESSION["theme"] . ".css";
+  } else {
+    $theme = "./styles/style.css";
+  }
   
   Authentication::protect();
 

@@ -9,6 +9,21 @@
     session_start();
   }
 
+  //read stylesheet theme from session
+  if(isset($_SESSION["theme"])) {
+    $theme = "./styles/" . $_SESSION["theme"] . ".css";
+  } else {
+    $theme = "./styles/style.css";
+  }
+
+  $message = "";
+
+  if(isset($_POST["submit"])) {
+    //get the selected colour theme
+    $_SESSION["theme"] = $_POST["changeTheme"];
+    $theme = "./styles/" . $_SESSION["theme"] . ".css";
+  }
+  
   $title = "Change Theme";
   $loginName = $_SESSION["username"];
   
