@@ -43,7 +43,7 @@
   }
 
   // rename category
-  // check if delete button has been pressed
+  // check if modify button has been pressed
   if(isset($_POST["modify"])) {
     // check if a category id was supplied
     if(isset($_POST["modifyCategory"])) {

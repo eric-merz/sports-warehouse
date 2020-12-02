@@ -73,7 +73,7 @@ class Item {
       $pdo = $this->_db->connect();
 
       // set up SQL
-      $sql = "SELECT itemId, photo, itemName, price, salePrice, description, featured FROM item";
+      $sql = "SELECT itemId, photo, itemName, price, salePrice, description, featured, categoryId FROM item";
       $stmt = $pdo->prepare($sql);
 
       // execuet SQL
@@ -92,7 +92,7 @@ class Item {
       $pdo = $this->_db->connect();
 
       // set up SQL
-      $sql = "SELECT itemId, photo, itemName, price, salePrice, description FROM item WHERE itemId = :itemId";
+      $sql = "SELECT itemId, photo, itemName, price, salePrice, description, categoryId, featured FROM item WHERE itemId = :itemId";
       $stmt = $pdo->prepare($sql);
       $stmt->bindParam(":itemId", $singleItemId, PDO::PARAM_INT);
 
@@ -151,23 +151,76 @@ class Item {
     }
   }
 
-    // get category items
-    public function getCatItems() {
-      try {
-        // connect to db
-        $pdo = $this->_db->connect();
-  
-        // set up SQL
-        $sql = "SELECT itemId, categoryId, photo, itemName, price, salePrice, description, featured FROM item WHERE categoryId = " . $_GET["categoryId"];
-        $stmt = $pdo->prepare($sql);
-  
-        // execuet SQL
-        $rows = $this->_db->executeSQL($stmt);
-  
-        return $rows;
-      } catch (PDOException $e) {
-        throw $e;
-      }
+  // get category items
+  public function getCatItems() {
+    try {
+      // connect to db
+      $pdo = $this->_db->connect();
+
+      // set up SQL
+      $sql = "SELECT itemId, categoryId, photo, itemName, price, salePrice, description, featured FROM item WHERE categoryId = " . $_GET["categoryId"];
+      $stmt = $pdo->prepare($sql);
+
+      // execuet SQL
+      $rows = $this->_db->executeSQL($stmt);
+
+      return $rows;
+    } catch (PDOException $e) {
+      throw $e;
     }
+  }
+
+  // add new item
+  public function addItem() {
+    // connect to db
+    $pdo = $this->_db->connect();
+
+    // get the file name
+    $photoPath = basename($_FILES["photoPath"]["name"]);
+
+    // set up SQL
+    $sql = "INSERT INTO item(itemName, photo, price, salePrice, description, featured, categoryId) VALUES(:itemName, :photo, :price, :salePrice, :description, :featured, :categoryId)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(":itemName", $_POST["itemName"], PDO::PARAM_STR);
+    $stmt->bindValue(":photo", $photoPath, PDO::PARAM_STR);
+    $stmt->bindValue(":price", $_POST["itemPrice"], PDO::PARAM_STR);
+    $stmt->bindValue(":salePrice", $_POST["itemSalePrice"], PDO::PARAM_STR);
+    $stmt->bindValue(":description", $_POST["itemDescription"], PDO::PARAM_STR);
+    $stmt->bindValue(":featured", $_POST["itemFeatured"], PDO::PARAM_BOOL);
+    $stmt->bindValue(":categoryId", $_POST["categoryId"], PDO::PARAM_INT);
+
+    // execuet SQL
+    $this->_db->executeNonQuery($stmt, true);
+  }
+
+  // delete item
+  public function deleteItem($itemId) {
+    // connect to db
+    $pdo = $this->_db->connect();
+
+    // set up SQL
+    $sql = "DELETE FROM item WHERE itemId = :itemId";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(":itemId", $itemId, PDO::PARAM_INT);
+
+    // execuet SQL
+    $this->_db->executeNonQuery($stmt, false);
+  }
+
+  // modify item
+  public function modifyItem() {
+    // connect to db
+    $pdo = $this->_db->connect();
+
+    // set up SQL
+    $sql = "UPDATE category SET categoryName = :categoryName WHERE categoryId = :categoryId";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(":categoryId", $_POST["categoryId"], PDO::PARAM_INT);
+    $stmt->bindValue(":categoryName", $_POST["modifyCategory"], PDO::PARAM_STR);
+
+    // execuet SQL
+    $this->_db->executeNonQuery($stmt, true);
+    $message = "Category was renamed.";
+  }
 }
 ?>

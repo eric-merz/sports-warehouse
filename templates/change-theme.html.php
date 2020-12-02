@@ -7,17 +7,8 @@
     <legend>Change Theme</legend>
     <label for="changeTheme">Theme:</label>
     <select id="changeTheme" name="changeTheme">
-      <?php if($theme == "darkTheme.css"): ?>
-        <option value="darkTheme" selected>Dark Theme</option>
-      <?php else: ?>
-        <option value="darkTheme">Dark Theme</option>
-      <?php endif;
-      
-      if($theme == "style.css"): ?>
-        <option value="style" selected>Light Theme</option>
-      <?php else: ?>
-        <option value="style">Light Theme</option>
-      <?php endif; ?>
+      <option value="darkTheme">Dark Theme</option>
+      <option value="style">Light Theme</option>
     </select>
     <input type="submit" value="Change Theme" name="submit">
   </fieldset>
