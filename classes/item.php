@@ -208,19 +208,27 @@ class Item {
   }
 
   // modify item
-  public function modifyItem() {
+  public function modifyItem($itemId) {
     // connect to db
     $pdo = $this->_db->connect();
 
+    // get the file name
+    $photoPath = basename($_FILES["photoPath"]["name"]);
+
     // set up SQL
-    $sql = "UPDATE category SET categoryName = :categoryName WHERE categoryId = :categoryId";
+    $sql = "UPDATE item SET itemName = :itemName, photo = :photo, price = :price, salePrice = :salePrice, description = :description, featured = :featured, categoryId = :categoryId WHERE itemId = :itemId";
     $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(":itemId", $itemId, PDO::PARAM_INT);
+    $stmt->bindValue(":itemName", $_POST["itemName"], PDO::PARAM_STR);
+    $stmt->bindValue(":photo", $photoPath, PDO::PARAM_STR);
+    $stmt->bindValue(":price", $_POST["itemPrice"], PDO::PARAM_STR);
+    $stmt->bindValue(":salePrice", $_POST["itemSalePrice"], PDO::PARAM_STR);
+    $stmt->bindValue(":description", $_POST["itemDescription"], PDO::PARAM_STR);
+    $stmt->bindValue(":featured", $_POST["itemFeatured"], PDO::PARAM_BOOL);
     $stmt->bindValue(":categoryId", $_POST["categoryId"], PDO::PARAM_INT);
-    $stmt->bindValue(":categoryName", $_POST["modifyCategory"], PDO::PARAM_STR);
 
     // execuet SQL
     $this->_db->executeNonQuery($stmt, true);
-    $message = "Category was renamed.";
   }
 }
 ?>

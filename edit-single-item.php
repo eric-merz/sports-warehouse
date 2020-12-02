@@ -46,17 +46,52 @@
   // delete item
   // check if delete button has been pressed
   if(isset($_POST["delete"])) {
-    $item->deleteItem($_POST["deleteItemId"]);
+    $item->deleteItem($_POST["selectedItem"]);
     header("Location:edit-items.php");
   }
 
-
   // modify item
-  // check if modify button has been pressed
+  // check if edit button has been pressed
   if(isset($_POST["modify"])) {
-    // check if a category id was supplied
-    if(isset($_POST["modifyItem"])) {
-      $category->modifyItem();
+    // check if a category name was supplied
+    if(!empty($_POST["itemName"]) && !empty($_POST["itemPrice"]) && !empty($_POST["itemSalePrice"]) && !empty($_POST["itemDescription"])) {
+      // save the file
+      // specify the directory where image will be saved
+      $targetDirectory = "./images/";
+    
+      // get the file name
+      $photoPath = basename($_FILES["photoPath"]["name"]);
+      
+      // set the entire path
+      $targetFile = $targetDirectory . $photoPath;
+
+      // only allow image files
+      $imageFileType = pathinfo($targetFile, PATHINFO_EXTENSION);
+      if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"&& $imageFileType != "gif") {
+        $message = "Sorry, only JPG, JPEG, PNG & GIF files are allowed";
+        $error = true;
+      }
+
+      // check the file size php.ini has an upload_max_filesize, default set to 2M
+      // if the file size exceeds the limit the error code is 1
+      if ($_FILES["photoPath"]["error"] == 1) {
+        $message = "Sorry, your file is too large. Max of 2M is allowed";
+        $error = true;
+      }
+
+      if ($error == false) {
+        if (move_uploaded_file($_FILES["photoPath"]["tmp_name"], $targetFile)) {
+          $message = "The file $photoPath has been uploaded";
+        } else {
+          $message = "Sorry there was an error uploading your file. Error code:" . $_FILES["photoPath"]["error"];
+        }
+      } else {
+        $photoPath = "";
+      }
+
+      // modify the item
+      $item->modifyItem($_POST["selectedItem"]);
+      header("Location:edit-items.php");
     }
     header("Location:edit-items.php");
   }
@@ -71,30 +106,3 @@
 
   include "templates/login-pages-layout.html.php";
 ?>"
-
-
-    <!-- Array ( 
-      [0] => Array ( 
-        [itemId] => 1 
-        [0] => 1 
-        
-        [photo] => soccerBall.jpg
-        [1] => soccerBall.jpg 
-        
-        [itemName] => Adidas Euro16 Top Soccer Ball 
-        [2] => Adidas Euro16 Top Soccer Ball 
-        
-        [price] => 46.00 
-        [3] => 46.00 
-        
-        [salePrice] => 35.95 
-        [4] => 35.95 
-        
-        [description] => adidas Performance Euro 16 Official Match Soccer Ball, Size 5, White/Bright Blue/Solar 
-        [5] => adidas Performance Euro 16 Official Match Soccer Ball, Size 5, White/Bright Blue/Solar 
-        
-        [categoryId] => 5 
-        [6] => 5 
-        
-        [featured] => 1 
-        [7] => 1 ) )  -->

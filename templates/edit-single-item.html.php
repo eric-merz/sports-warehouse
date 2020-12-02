@@ -44,8 +44,8 @@
         <input type="file" name="photoPath" value="<?= $selectedItemPhoto ?>">
       </p>
       <p>
-        <input type="text" name="deleteItemId" value="<?= $selectedItemId ?>">
-        <input class="edit-category" type="submit" name="edit" value="Edit">
+        <input type="hidden" name="selectedItem" value="<?= $selectedItemId ?>">
+        <input class="edit-category" type="submit" name="modify" value="Modify">
         <input type="submit" name="delete" value="Delete">
       </p>
       <p><?= $message ?></p>
